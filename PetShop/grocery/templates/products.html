@@ -1,0 +1,50 @@
+<!-- products.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Products</title>
+    <style>
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .product-item {
+            flex-basis: 30%; /* Adjust the width to fit three items per row */
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .product-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product-details {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Products</h1>
+    <ul class="product-container">
+        {% for product in products %}
+        <li class="product-item">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <div class="product-details">
+                <strong>Name:</strong> {{ product.name }}<br>
+                <strong>Price:</strong> {{ product.price }}<br>
+                <strong>Description:</strong> {{ product.description }}<br>
+                <strong>Stock:</strong> {{ product.stock }}<br>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

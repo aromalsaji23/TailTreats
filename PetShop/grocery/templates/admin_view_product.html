@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Product</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Custom Styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background: #f8f9fa;
+        }
+
+        .card {
+            margin-top: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+
+        /* Scrollable Table */
+        .table-container {
+            max-height: 500px; /* Adjust the height as needed */
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            margin-top: 4%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container">
+            <a class="navbar-brand text-success logo h1" href="{% url 'home' %}">𝐓𝐚𝐢𝐥𝐓𝐫𝐞𝐚𝐭𝐬</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'admin_home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'view_user' %}">Order</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'admin_viewBooking' %}">Booking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'view_user' %}">User</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Product</a>
+                        <ul class="dropdown-menu" aria-labelledby="productDropdown">
+                            <li><a class="dropdown-item" href="{% url 'add_product' %}">Add Product</a></li>
+                            <li><a class="dropdown-item" href="{% url 'admin_view_product' %}">View Product</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block body %}
+    <center><h2 style="color:red;margin-top:2%">View Product</h2></center>
+    <hr>
+
+    <div class="container">
+        <div class="table-container">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Image</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Stock</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in pro %}
+                    <tr>
+                        <td>{{ i.name }}</td>
+                        <td><img src="{{ i.image.url }}" style="width:50px; height:50px"></td>
+                        <td>{{ i.category.name }}</td>
+                        <td>{{ i.price }}</td>
+                        <td>{{ i.desc }}</td>
+                        <td>{{ i.stock }}</td>
+                        <td>
+                            <a href="{% url 'edit_product' i.id %}" class="btn btn-success btn-sm">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'delete_product' i.id %}" onclick="return confirm('Are you sure you want to delete this product?')" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        {% for i in message %}
+        alert("{{ i }}");
+        {% endfor %}
+    </script>
+
+    {% endblock %}
+</body>
+</html>

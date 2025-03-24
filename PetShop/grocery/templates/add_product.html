@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Custom Styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background: #f8f9fa;
+        }
+
+        .card {
+            margin-top: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container">
+            <a class="navbar-brand text-success logo h1" href="{% url 'home' %}">𝐓𝐚𝐢𝐥𝐓𝐫𝐞𝐚𝐭𝐬</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'admin_home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'view_user' %}">Order</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'admin_viewBooking' %}">Booking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'view_user' %}">User</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Product</a>
+                        <ul class="dropdown-menu" aria-labelledby="productDropdown">
+                            <li><a class="dropdown-item" href="{% url 'add_product' %}">Add Product</a></li>
+                            <li><a class="dropdown-item" href="{% url 'admin_view_product' %}">View Product</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+        <h4 class="text-center mt-5">Add Product</h4>
+        <hr>
+        <div class="card mx-auto" style="width: 70%; background-image: url({% static 'images/background.jpg' %}); background-size: cover;">
+            <div class="card-body">
+                <form method="post" action="{% url 'add_product' %}" enctype="multipart/form-data" onsubmit="return validateForm()">
+                    {% csrf_token %}
+                    
+                    <div class="form-group mb-3">
+                        <label for="productName">Product Name</label>
+                        <input type="text" class="form-control" name="pname" id="productName" placeholder="Enter Product Name" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="productStock">Stock</label>
+                        <input type="number" class="form-control" name="stock" id="productStock" placeholder="Enter Stock Quantity" min="0" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="productImage">Product Image</label>
+                        <input type="file" class="form-control" name="img" id="productImage" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="category">Category</label>
+                            <select class="form-control" name="cat" id="category" required>
+                                {% for i in cat %}
+                                <option value="{{ i.name }}">{{ i.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="productPrice">Product Price</label>
+                            <input type="number" class="form-control" name="price" id="productPrice" placeholder="Enter Price" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="desc" id="description" rows="3" placeholder="Enter Product Description" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </form>
+
+                {% if error %}
+                <div class="alert alert-success mt-3">1 Product Added Successfully</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+
+    <script>
+        function validateForm() {
+            let stock = document.getElementById("productStock").value;
+            let price = document.getElementById("productPrice").value;
+
+            if (stock < 0 || price < 0) {
+                alert("Stock and price must be non-negative.");
+                return false;
+            }
+
+            if (!Number.isInteger(Number(stock)) || !Number.isInteger(Number(price))) {
+                alert("Stock and price must be whole numbers.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+</body>
+
+</html>

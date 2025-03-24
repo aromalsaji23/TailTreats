@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Sales Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+    <h1>Sales Report for {{ month }}</h1>
+    <p><strong>Total Sales:</strong> ₹{{ total_sales }}</p>
+    <p><strong>Total Orders:</strong> {{ total_orders }}</p>
+
+    <h2>Customer Purchases</h2>
+    <table>
+        <tr>
+            <th>Customer</th>
+            <th>Product ID</th>
+            <th>Quantity</th>
+            <th>Total Amount</th>
+            <th>Date</th>
+        </tr>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.username }}</td>
+            <td>{{ customer.product }}</td>
+            <td>{{ customer.quantity }}</td>
+            <td>₹{{ customer.total }}</td>
+            <td>{{ customer.date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

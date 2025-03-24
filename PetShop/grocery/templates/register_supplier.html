@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Registration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS */
+        body {
+            background-image: url('/static/images/r.jpg');
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 450px;
+            margin: 80px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-control {
+            border-radius: 5px;
+            box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn-register {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 10px;
+            transition: 0.3s ease-in-out;
+        }
+        .btn-register:hover {
+            background-color: #0056b3;
+        }
+        .btn-back {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            margin-top: 10px;
+            border-radius: 5px;
+            padding: 10px;
+            transition: 0.3s ease-in-out;
+        }
+        .btn-back:hover {
+            background-color: #218838;
+        }
+        #registration-success {
+            display: none;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Supplier Registration</h2>
+        <!-- Message for successful registration -->
+        <div id="registration-success" class="alert alert-success" role="alert">
+            Registered successfully! Please proceed to login.
+        </div>
+        <form id="registration-form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="re_password">Re-enter Password:</label>
+                <input type="password" id="re_password" name="re_password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-register">Register</button>
+        </form>
+        
+        <!-- Back Button -->
+        <button class="btn btn-back" onclick="window.history.back()">Back</button>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript for form submission -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('#registration-form').onsubmit = function (event) {
+                event.preventDefault(); // Prevent default form submission
+                document.querySelector('#registration-success').style.display = 'block'; // Show success message
+                setTimeout(function () {
+                    window.location.href = '/login_supplier'; // Redirect to login page
+                }, 2000);
+            };
+        });
+    </script>
+
+</body>
+</html>

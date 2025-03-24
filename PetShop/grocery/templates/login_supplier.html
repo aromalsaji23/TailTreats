@@ -1,0 +1,177 @@
+{% block body %}
+{% load static %}
+
+{% if error == "yes" %}
+<script>
+    alert('Logged in successfully');
+    window.location = '{% url 'home' %}';
+</script>
+{% endif %}
+{% if error == "not" %}
+<script>
+    alert('Username & Password are not Matching');
+</script>
+{% endif %}
+
+<style>
+  /* Keyframes for Fade-in Animation */
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(-20px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+
+  /* Keyframes for Button Hover Effect */
+  @keyframes buttonHover {
+      0% {
+          transform: scale(1);
+      }
+      50% {
+          transform: scale(1.05);
+      }
+      100% {
+          transform: scale(1);
+      }
+  }
+
+  /* Keyframes for Input Field Focus Animation */
+  @keyframes inputFocus {
+      from {
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+      to {
+          box-shadow: 0 0 10px rgba(0, 123, 255, 0.8);
+      }
+  }
+
+  /* General Styles */
+  body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('/static/images/t.jpg');  
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: 100vh;
+  }
+
+  .navbar {
+      width: 100%;
+      align-self: flex-start;
+  }
+
+  .login-container {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 50px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      margin-top: 50px;
+      animation: fadeIn 1s ease-in-out; /* Fade-in effect */
+  }
+
+  h2 {
+      color: #333;
+  }
+
+  label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #555;
+  }
+
+  input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: all 0.3s ease-in-out;
+  }
+
+  /* Input Focus Animation */
+  input:focus {
+      animation: inputFocus 0.5s ease-in-out alternate infinite;
+      border-color: #007bff;
+      outline: none;
+  }
+
+  button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease-in-out;
+  }
+
+  /* Button Hover Animation */
+  button:hover {
+      background-color: #45a049;
+      animation: buttonHover 0.5s ease-in-out;
+  }
+
+  .back-button {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+  }
+
+  .back-button:hover {
+      background-color: #0056b3;
+      animation: buttonHover 0.5s ease-in-out;
+  }
+
+  p {
+      color: #555;
+  }
+
+  a {
+      color: #007bff;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+</style>
+
+
+<div class="container">
+    <h2 style="margin-top:20px" align="center">Supplier Login</h2>
+    <hr>
+    <div class="login-container">
+        <form method="post" action="{% url 'supplier_dashboard' %}">
+            {% csrf_token %}
+            <label for="username">𝐔𝐒𝐄𝐑𝐍𝐀𝐌𝐄</label>
+            <input type="text" id="username" name="username" placeholder="𝐔𝐒𝐄𝐑𝐍𝐀𝐌𝐄" required>
+            
+            <label for="password">𝐏𝐀𝐒𝐒𝐖𝐎𝐑𝐃</label>
+            <input type="password" id="password" name="password" placeholder="𝐏𝐀𝐒𝐒𝐖𝐎𝐑𝐃" required>
+            
+            <button type="submit">𝐋𝐨𝐠𝐢𝐧</button>
+        </form>
+        <button class="back-button" onclick="window.history.back()">𝐁𝐚𝐜𝐤</button>
+    </div>
+</div>
+{% endblock %}

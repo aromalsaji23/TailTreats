@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Updated to Bootstrap 5 -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" type="module"></script>
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" nomodule></script>
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            font-size: 1rem;
+            padding: 10px 15px;
+            color: #555;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-link:hover {
+            color: #4CAF50;
+        }
+
+        .navbar {
+            background: #f8f9fa;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            margin-left: 15px;
+        }
+
+        .badge {
+            font-size: 0.8rem;
+        }
+
+        .glow {
+            font-size: 80px;
+            color: #000000;
+            text-align: center;
+            -webkit-animation: glow 1s ease-in-out infinite alternate;
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #fff, 0 0 30px #e60073, 0 0 40px #e60073;
+            }
+
+            to {
+                text-shadow: 0 0 20px #fff, 0 0 40px #ff4da6, 0 0 50px #ff4da6;
+            }
+        }
+
+        hr.rounded {
+            border-top: 8px solid lightblue;
+            border-radius: 5px;
+        }
+
+        .prjdiv:hover {
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+            transform: translateY(-20px);
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="{% url 'home' %}">
+                𝐓𝐚𝐢𝐥𝐓𝐫𝐞𝐚𝐭𝐬
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="templatemo_main_nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'admin_home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'view_user' %}">Order</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'admin_viewBooking' %}">Booking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'view_user' %}">User</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <ion-icon name="albums"></ion-icon> Product
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="productDropdown">
+                            <li><a class="dropdown-item" href="{% url 'add_product' %}">Add Product</a></li>
+                            <li><a class="dropdown-item" href="{% url 'admin_view_product' %}">View Product</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <ion-icon name="newspaper-sharp"></ion-icon> Category
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+                            <li><a class="dropdown-item" href="{% url 'add_categary' %}">Add Category</a></li>
+                            <li><a class="dropdown-item" href="{% url 'view_categary' %}">View Category</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <center>
+            <table class="table table-bordered" id="myTable">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Contact</th>
+                        <th>City</th>
+                        <th>Email Id</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in user %}
+                    <tr>
+                        <td><img src="{{ i.image.url }}" style="width:100px;height:90px" alt="User Image"></td>
+                        <td>{{ i.user.first_name }}</td>
+                        <td>{{ i.user.last_name }}</td>
+                        <td>{{ i.contact }}</td>
+                        <td>{{ i.city }}</td>
+                        <td>{{ i.user.email }}</td>
+                        <td>
+                            <a href="{% url 'delete_user' i.user.id %}" onclick="return confirm('Are you sure?')">
+                                <button class="button">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </center>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

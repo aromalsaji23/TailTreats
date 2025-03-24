@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>𝐓𝐚𝐢𝐥𝐓𝐫𝐞𝐚𝐭𝐬</title>
+    <link rel="icon" href="images/favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        #myInput {
+            background-image: url('/css/searchicon.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            width: 20%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+        #myTable {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ddd;
+            font-size: 18px;
+        }
+        #myTable th {
+            text-align: left;
+            padding: 12px;
+            background-color: rgb(237, 31, 123);
+            color: white;
+        }
+        #myTable td {
+            text-align: left;
+            padding: 12px;
+            background-color: white;
+        }
+        #myTable tr {
+            border-bottom: 1px solid #ddd;
+        }
+        #myTable tr.header, #myTable tr:hover {
+            background-color: #f1f1f1;
+        }
+        .button {
+            background-color: rgb(25, 238, 149);
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 1px 1px;
+            cursor: pointer;
+        }
+        .button1 {border-radius: 15px;}
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+   
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a9949b;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5b5558;
+        }
+        .nav-link:hover{
+            color: lightblue !important;
+            background-color: #e21bca;
+            border-radius:10px
+        }
+    
+        .nav-link{
+            /*font-weight:bold;*/
+        }
+        .navbar-brand{
+            text-shadow: 1px 1px lightblue;
+        }
+        .navbar-brand:hover{
+            color: #00060c !important;
+        }
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        /* Style for the <li> element (container for the cards) */
+li {
+    display: flex;  /* Using Flexbox to arrange cards inline */
+    flex-wrap: wrap; /* Allow wrapping if screen size is small */
+    justify-content: flex-start; /* Align items to the left */
+    gap: 20px; /* Add space between cards */
+}
+
+/* Style for each card */
+.single-list-topics-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 205px;
+    height: 170px;
+    background: #f7f7f7;
+    border-radius: 3px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(71, 71, 71, 0.2);
+    -webkit-transition: 0.3s linear;
+    -moz-transition: 0.3s linear;
+    -ms-transition: 0.3s linear;
+    -o-transition: 0.3s linear;
+    transition: 0.3s linear;
+}
+
+/* Style for the anchor links inside the h2 */
+.single-list-topics-content h2 > a {
+    margin: 13px 0;
+    text-decoration: none; /* Optional: removes underline from the link */
+}
+
+/* Icon styling */
+.single-list-topics-icon [class^="flaticon-"]:before,
+.single-list-topics-icon [class*=" flaticon-"]:before,
+.single-list-topics-icon [class^="flaticon-"]:after,
+.single-list-topics-icon [class*=" flaticon-"]:after {
+    font-size: 45px;
+    color: #343a3f;
+}
+
+/* Icon color change on hover */
+.single-list-topics-content:hover .single-list-topics-icon [class^="flaticon-"]:before,
+.single-list-topics-content:hover .single-list-topics-icon [class*=" flaticon-"]:before,
+.single-list-topics-content:hover .single-list-topics-icon [class^="flaticon-"]:after,
+.single-list-topics-content:hover .single-list-topics-icon [class*=" flaticon-"]:after {
+    color: #ffffff;
+}
+
+/* Style for the link and text when hovering */
+.single-list-topics-content:hover h2 > a,
+.single-list-topics-content:hover p {
+    color: #fff !important;
+}
+
+/* Hover effect for the card */
+.single-list-topics-content:hover {
+    color: #f5f5f5;
+    background: #ff545a;
+    box-shadow: 0 5px 10px rgba(71, 71, 71, 0.4);
+}
+.card-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .card-item {
+        width: 200px;
+        text-align: center;
+
+       
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body style="background-color:rgb(255, 255, 255)">
+<nav class="navbar navbar-expand-sm" style="background-color : #f5f3f5 ; border-bottom:1px solid #e0e9cd">
+    <a class="navbar-brand pl-3" href="#" style="color:rgb(18, 16, 16); font-size: 34px; font-weight: bold;">
+    <i class="fas fa-paw"></i> 𝐓𝐚𝐢𝐥𝐓𝐫𝐞𝐚𝐭𝐬
+</a>
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav pl-2 text-center">
+            {% if request.user.is_staff %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin_home' %}" style="color:rgb(0, 0, 0)"><ion-icon style="margin-right:0px" name="home-sharp"></ion-icon>Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'view_user' %}" style="color:rgb(2, 1, 1)"><ion-icon style="margin-right:0px" name="people"></ion-icon>ViewUser</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin_viewBooking' %}" style="color:rgb(0, 0, 0)"><ion-icon style="margin-right:0px" name="logo-bitcoin"></ion-icon>Orders</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:rgb(0, 0, 0)"><ion-icon style="margin-right:0px" name="albums"></ion-icon>Product</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'add_product' %}">Add Product</a>
+                    <a class="dropdown-item" href="{% url 'admin_view_product' %}">View Product</a>
+                </div>
+            </li>
+
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color:rgb(0, 0, 0)"><ion-icon style="margin-right:1px" name="newspaper-sharp"></ion-icon>Category</a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'add_categary' %}">Add Category</a>
+        <a class="dropdown-item" href="{% url 'view_categary' %}">View Category</a>
+    </div>
+   
+   
+       
+</li>
+<div class="dashboard">
+    <a href="{% url 'create_product_request' %}" class="btn btn-primary">Request Product</a>
+    <a href="{% url 'view_requests' %}" class="btn btn-primary"> View Request Product</a>
+
+</div>
+
+
+    {% endif %}
+
+
+    {% if request.user.username %}
+    {% if not request.user.is_staff %}
+    
+
+  
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'view_product' 0 %}" style="color:rgb(0, 0, 0)"><ion-icon style="margin-right:2px" name="eye"></ion-icon>Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'view_booking' %}" style="color:rgb(13, 13, 13)"><ion-icon style="margin-right:2px" name="aperture"></ion-icon>My Orders</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'change_password' %}" style="color:rgb(1, 1, 1)"><ion-icon style="margin-right:2px" name="document-text-sharp"></ion-icon>Change Password</a>
+    </li>
+    <li class="nav-item dropdown">    
+    
+</li>
+
+
+    {% endif %}
+    {% else %}
+
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'home'  %}" style="color:rgb(0, 0, 0)"><ion-icon style="margin-right:2px" name="home-sharp"></ion-icon>Home</a>
+    </li>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+    <a class="nav-link" href="{% url 'logout' %}" style="color:rgb(0, 0, 0)"><ion-icon style="margin-right:1px" name="power-sharp"></ion-icon>Logout</a>
+    </li>
+    {% if not request.user.is_staff %}
+    <li class="nav-item">
+      <a href="{% url 'profile' %}"><h5 class="nav-link" style="color:#000000 ; text-transform : capitalize"><ion-icon style="margin-right:4px;color:#5e99de" name="person-circle-sharp"></ion-icon>Welcome {{request.user.username}}</h5>
+      </a></li>
+    {% else %}
+    {% endif %}
+{% else %}
+
+
+
+    {% endif %}
+
+    {% if not request.user.is_staff %}
+    {% if request.user.username %}
+      <a href="{% url 'cart' %}" style="border:1px solid rgb(0, 0, 0)" class="btn btn-default btn-lg text-dark text-capitalize">
+        <ion-icon style="color:black;margin-top:2%" name="cart"></ion-icon><span style="color:black">{{num1}}</span><span style="margin-left:6px;margin-top:2%;color:rgb(0, 0, 0)">Cart</span></a></center>
+
+{% endif %}
+    {% endif %}
+
+    </ul>
+
+</div>
+
+</nav>
+<h1></h1>
+<h2></h2>
+<h3></h3>
+<h4></h4>
+
+
+
+{% block body %}
+
+{% endblock %}
+</body>
+</html>

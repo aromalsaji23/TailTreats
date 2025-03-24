@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Pet Profiles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://wallpaperaccess.com/full/3690768.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            text-align: center;
+            color: #333;
+        }
+        .back-button {
+            display: inline-block;
+            background: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .pet-card {
+            background: linear-gradient(135deg, #63eb97, #67ebb8);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+        .pet-card img {
+            width: 100%;
+            max-width: 175px;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            margin: 10px auto;
+        }
+        .button-group a {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            margin: 5px;
+        }
+        .edit-btn {
+            background: #28a745;
+        }
+        .delete-btn {
+            background: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Your Pet Profiles</h2>
+        <a href="{% url 'view_product' 0 %}" class="back-button">Back to View Products</a>
+
+        {% if pets %}
+            {% for pet in pets %}
+                <div class="pet-card">
+                    <h3>{{ pet.name }}</h3>
+                    <p><strong>Breed:</strong> {{ pet.breed }}</p>
+                    <p><strong>Age:</strong> {{ pet.age }}</p>
+                    <p><strong>Veterinarian:</strong> {{ pet.veterinarian }}</p>
+                    <p><strong>visited date:</strong> {{ pet.visit_date }}</p>
+                    {% if pet.image %}
+                        <img src="{{ pet.image.url }}" alt="Pet Image">
+                    {% endif %}
+                    <div class="button-group">
+                        <a href="{% url 'edit_pet_profile' pet.id %}" class="edit-btn">Edit</a>
+                        <a href="{% url 'delete_pet_profile_confirm' pet.id %}" class="delete-btn" onclick="return confirm('Are you sure you want to delete {{ pet.name }}?');">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No pet profiles found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
